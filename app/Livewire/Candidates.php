@@ -28,7 +28,7 @@ class Candidates extends Component
         $candidate = Candidate::findOrFail($id);
 
         if (Session::has("liked_$id") || Session::has("disliked_$id")) {
-            session()->flash('message', 'You have already voted!');
+            session()->flash('message', 'انت مصوت بالفعل!');
             return;
         }
 
@@ -44,7 +44,7 @@ class Candidates extends Component
         $candidate = Candidate::findOrFail($id);
 
         if (Session::has("liked_$id") || Session::has("disliked_$id")) {
-            session()->flash('message', 'You have already voted!');
+            session()->flash('message', 'انت مصوت بالفعل!');
             return;
         }
 
@@ -58,7 +58,6 @@ class Candidates extends Component
     public function vote($candidateId)
     {
         $userId = auth()->id();
-
         $sessionId = Session::getId();
 
         $existingVote = Vote::where(function ($query) use ($userId, $sessionId) {

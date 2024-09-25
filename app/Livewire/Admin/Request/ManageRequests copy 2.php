@@ -14,8 +14,7 @@ class ManageRequests extends Component
     use WithPagination;
 
     public $requestIdToDelete;
-    public $searchTerm;
-    public $statusFilter;
+
     public function mount()
     {
         if (Gate::denies('view requests')) {
@@ -40,24 +39,8 @@ class ManageRequests extends Component
         }
 
         // Retrieve requests for all the user's departments and sub-departments
-        $query = RequestModel::whereIn('department_id', array_unique($departmentIds));
-
-        // Apply search filter by name or phone number
-        if (!empty($this->searchTerm)) {
-            $query->where(function ($q) {
-                $q->where('request_title', 'like', '%' . $this->searchTerm . '%')
-                  ->orWhere('phone_number', 'like', '%' . $this->searchTerm . '%');
-            });
-        }
-
-        // Apply status filter
-        if (!empty($this->statusFilter)) {
-            $query->where('status', $this->statusFilter);
-        }
-
-        return $query->paginate(10);
+        return RequestModel::whereIn('department_id', array_unique($departmentIds))->paginate(10);
     }
-
 
     private function getAllDescendantIds($parentId)
     {

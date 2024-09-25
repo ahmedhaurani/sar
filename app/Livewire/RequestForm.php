@@ -77,7 +77,7 @@ class RequestForm extends Component
             'attachments' => json_encode($uploadedFiles),  // Store as JSON
         ]);
 
-        session()->flash('message', 'Request submitted successfully.');
+        session()->flash('message', 'تم ارسال الطلب بنجاح.');
         $this->reset();
         return redirect()->route('request.success');
     }

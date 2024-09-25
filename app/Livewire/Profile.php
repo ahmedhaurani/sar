@@ -38,6 +38,6 @@ class Profile extends Component
             'phone' => $this->phone,
         ]);
 
-        session()->flash('message', 'Profile updated successfully.');
+        session()->flash('message', 'تم تحديث الملف الشخصي');
     }
 }

@@ -10,7 +10,20 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
-
+           <!-- Search and Filter Form -->
+           <div class="row mb-4">
+            <div class="col-md-4">
+                <input type="text" wire:model.live="searchTerm" class="form-control" placeholder="ابحث بالاسم أو رقم الهاتف"> <!-- Search by name or phone -->
+            </div>
+            <div class="col-md-4">
+                <select wire:model.live="statusFilter" class="form-control">
+                    <option value="">كل الحالات</option> <!-- All statuses -->
+                    <option value="pending">معلق</option> <!-- Pending -->
+                    <option value="solved">تم الحل</option> <!-- Solved -->
+                    <option value="rejected">مرفوض</option> <!-- Rejected -->
+                </select>
+            </div>
+        </div>
             <!-- Table of Requests -->
             <div class="table-responsive">
                 <table class="table table-bordered table-striped align-middle">
@@ -34,14 +47,14 @@
                                 <td>{{ $request->note }}</td>
                                 <td>
                                     <!-- Edit Button -->
-                                    <a href="{{ route('requests.edit', $request->id) }}" class="btn btn-sm btn-success">
-                                        تعديل <!-- Edit -->
+                                    <a href="{{ route('requests.edit', $request->id) }}" class="btn btn-sm btn-warning">
+                                        عرض <!-- Edit -->
                                     </a>
 
                                     <!-- Delete Button with Confirmation -->
-                                    <button wire:click="confirmDelete({{ $request->id }})" class="btn btn-sm btn-danger mx-2">
+                                    <a href="{{ route('admin.requests.confirm-delete', $request->id) }}" class="btn btn-sm btn-danger mx-2">
                                         حذف <!-- Delete -->
-                                    </button>
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach

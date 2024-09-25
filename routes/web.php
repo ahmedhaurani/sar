@@ -37,6 +37,8 @@ use  App\Http\Controllers\Auth\ResetPasswordController;
 use App\Livewire\Candidates;
 use App\Livewire\Admin\Candidate\AddCandidate;
 
+use App\Livewire\Admin\Request\ConfirmDeleteRequest;
+
 
 Route::middleware([App\Http\Middleware\TrackVisitor::class])->group(function () {
     Route::get('/', Home::class)->name('index');
@@ -130,6 +132,7 @@ Route::group([
     // Requests management routes
     Route::get('requests/{requestId}/edit', EditRequest::class)->name('requests.edit');
     Route::get('requests', ManageRequests::class)->name('admin.requests');
+    Route::get('requests/{requestId}/delete', ConfirmDeleteRequest::class)->name('admin.requests.confirm-delete');
 
     //settings
     Route::get('settings', Settings::class)->name('admin.settings');
